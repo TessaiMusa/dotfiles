@@ -1,0 +1,95 @@
+* {
+  all: unset;
+}
+
+window {
+  background-color: #000714;
+  color: #A9B9DB;
+  font-family: "Fira Code";
+}
+
+// Debug
+
+.b-red {
+  border: 1px solid;
+  border-color: #FF0000;
+  
+}
+
+.b-green {
+  border: 1px solid;
+  border-color: #00FF00;
+}
+
+// Common
+
+.nerdfont {
+  font-family: "JetBrainsMono Nerd Font Mono";
+  font-size: 30px;
+}
+
+.bold {
+  font-weight: 600;
+}
+
+scale trough {
+  border-radius: 20px;
+  min-height: 10px;
+  min-width: 240px;
+  background-color: #2A3F65;
+}
+
+scale trough highlight {
+  border-radius: 20px;
+  background-color: #A9B9DB;
+}
+
+.p-right {
+  padding-right: 17px;
+}
+
+.big {
+  font-size: 50px;
+}
+
+.semi-big {
+  font-size: 30px;
+}
+
+// Custom
+.blur {
+  background-image: url('/home/krito/Pictures/Wallpaper2_blur.jpg');
+  opacity: 0.5;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.musicart {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  min-height: 250px;
+  min-width: 250px;
+  margin: 20px;
+}
+
+.musicvolume {
+  margin: 10px;
+}
+
+.clock_base {
+  padding: 5px;
+}
+
+.date {
+  margin-top: 60px;
+  font-size: 30px;
+}
+
+.day {
+  margin-bottom: 60px;
+  font-size: 25px;
+}
+
+

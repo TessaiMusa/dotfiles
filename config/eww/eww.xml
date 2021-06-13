@@ -1,0 +1,143 @@
+<eww>
+	<includes></includes>
+	
+	<definitions>
+	<def name="blur">
+		<box class="blur" vexpand="true" hexpand="true">
+		</box>
+	</def>
+	<def name="player">
+		<box orientation="v" space-evenly="false">
+			<box class="musicart" style="background-image: url('{{music_cover}}');">
+			
+			</box>
+			<label class="bold" halign="center" text="{{music_title}}" />
+			<label class="musicartist" halign="center" text="{{music_artist}}" />
+
+			<box orientation="h" space-evenly="true">
+				<button class="nerdfont" onclick="mpc prev">
+					玲
+				</button>
+				<button class="nerdfont" onclick="mpc toggle">
+					{{music_play_pause}}
+				</button>
+				<button class="nerdfont" onclick="mpc next">
+					怜
+				</button>
+			</box>
+			<box class="musicvolume" orientation="h" space-evenly="false" halign="center">
+				<scale min="0" max="100" value="100" onchange="mpc --quiet volume $(echo {} | awk '{print int($0)}')" />
+			</box>
+		</box>
+	</def>
+	<def name="system">
+		<box orientation="v" space-evenly="true">
+			<box orientation="h" space-evenly="true">
+				<button class="nerdfont" halign="center" onclick="shutdown now">  </button>
+				<button class="nerdfont" halign="center" onclick="reboot"> ﰇ </button>
+			</box>
+			
+			<box orientation="h" space-evenly="true">
+				<button class="nerdfont" halign="center" onclick="bspc quit">  </button>
+				<button class="nerdfont" halign="center" onclick="systemctl hibernate"> ⏾ </button>
+			</box>
+		</box>
+	</def>
+	<def name="stat">
+		<box orientation="v" space-evenly="true">
+			<box class="statram" orientation="h" space-evenly="false" halign="center">
+				<label class="nerdfont p-right" halign="center" valign="center" text="" />
+				<scale active="false" min="0" max="100" value="{{stat_ram}}" />
+			</box>
+			<box class="statcpu" orientation="h" space-evenly="false" halign="center">
+				<label class="nerdfont p-right" halign="center" valign="center" text=""/> 
+				<scale active="false" min="0" max="100" value="{{EWW_CPU_USAGE['avg']}}" />
+			</box>
+			<box class="statdisk" orientation="h" space-evenly="false" halign="center">
+                                <label class="nerdfont p-right" halign="center" valign="center" text="﫭"/>
+				<scale active="false" min="70" max="200" value="{{stat_disk}}" />
+			</box>
+			<box class="stattmp" orientation="h" space-evenly="false" halign="center">
+				<label class="nerdfont p-right" halign="center" valign="center" text=""/>
+				<scale active="false" min="20" max="105" value="{{(EWW_TEMPS['CORE_0']+EWW_TEMPS['CORE_1']+EWW_TEMPS['CORE_2']+EWW_TEMPS['CORE_3'])/4}}" />
+			</box>
+		</box>
+	</def>
+	<def name="clock">
+		<box class="clock_base" orientation="h" space-evenly="true" hexpand="true" vexpand="true">
+			<box orientation="v" space-evenly="false" valign="center">
+				<label class="big" halign="center" valign="center" text="{{clock_time}}" />
+				<label class="semi-big" halign="center" valign="center" text="{{clock_seconds}}" />
+			</box>
+			<box orientation="v" hexpand="true" space-evenly="false" valign="center">
+				<label class="date" halign="center" valign="center" text="{{clock_date}}" />
+				<label class="day" halign="center" valign="center" text="{{clock_day}}" />
+			</box>
+		</box>
+	</def>
+	</definitions>
+	
+	
+	<variables>
+		<script-var name="music_title" interval="3s">
+			mpc current -f '%title%'
+		</script-var>
+		<script-var name="music_artist" interval="3s">
+			mpc current -f '%artist%'
+		</script-var>
+		<script-var name="music_cover" interval="1s">
+			${XDG_CONFIG_HOME}/eww/scripts/cover.sh
+		</script-var>
+		<script-var name="music_play_pause" interval="300ms">
+			${HOME}/.config/eww/scripts/playpause.sh
+		</script-var>
+		<script-var name="stat_ram" interval="2s">
+			${HOME}/.config/eww/scripts/ram.sh
+		</script-var>
+		<script-var name="clock_time" interval="2s">
+			date +%H:%M
+		</script-var>
+		<script-var name="clock_seconds" interval="1s">
+			date +%S
+		</script-var>
+		<script-var name="clock_date" interval="120s">
+			date "+%B %d"
+		</script-var>
+		<script-var name="clock_day" interval="120s">
+			date +%A
+		</script-var>
+	</variables>
+	
+	<windows> 
+		<window name="blur" focusable="false" stacking="bg">
+			<geometry x="0" y="0" width="1920" height="1080"/>
+			<widget>
+				<blur/>
+			</widget>
+		</window>
+		<window name="player" focusable="false" stacking="fg" >
+			<geometry x="550" y="350" width="250" height="410"/>
+			<widget>
+				<player/>
+			</widget>
+		</window>
+		<window name="stat" focusable="false" staking="fg">
+			<geometry x="850" y="350" width="300" height="200"/>
+			<widget>
+				<stat/>
+			</widget>
+		</window>
+		<window name="system" focusable="false" stacking="fg" >
+			<geometry x="1160" y="350" width="200" height="200"/>
+			<widget>
+				<system/>
+			</widget>
+		</window>
+		<window name="clock" focusable="false" stacking="fg">
+			<geometry x="850" y="560" width="510" height="200"/>
+			<widget>
+				<clock/>
+			</widget>
+		</window>
+	</windows>
+</eww>

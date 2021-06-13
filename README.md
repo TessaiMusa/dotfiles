@@ -1,5 +1,7 @@
 # My Dotfiles
 
+![pretty image](https://raw.githubusercontent.com/TessaiMusa/dotfiles/master/pictures/full.png "Pretty image")
+
 ## Required packages
 
 - BSPWM [Window manager]
